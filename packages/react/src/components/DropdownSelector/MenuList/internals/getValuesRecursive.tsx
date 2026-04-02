@@ -1,8 +1,8 @@
-import * as React from 'react'
-import MenuItem from '../../MenuItem'
-import { MenuListChildren } from '..'
-import MenuItemGroup from '../../MenuItemGroup'
-import { DropdownMenuItemProps } from '../../DropdownMenuItem'
+import * as React from 'react';
+import { MenuListChildren } from '..';
+import { DropdownMenuItemProps } from '../../DropdownMenuItem';
+import MenuItem from '../../MenuItem';
+import MenuItemGroup from '../../MenuItemGroup';
 
 /**
  * valueというpropsを持つ子要素の値を再起的に探索して配列にする
@@ -21,12 +21,14 @@ export function getValuesRecursive(children: MenuListChildren) {
       const props = child.props as {
         value?: string
         disabled?: boolean
+        isDefault?: boolean
         children?: React.ReactElement<typeof MenuItem | typeof MenuItemGroup>[]
       }
       if ('value' in props && typeof props.value === 'string') {
         propsArray.push({
           disabled: props.disabled,
           value: props.value,
+          isDefault: props.isDefault,
         })
       }
       if ('children' in props && props.children) {

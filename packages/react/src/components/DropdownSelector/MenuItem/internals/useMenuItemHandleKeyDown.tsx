@@ -1,6 +1,6 @@
-import { useCallback, useContext } from 'react'
-import { handleFocusByKeyBoard } from './handleFocusByKeyBoard'
-import { MenuListContext } from '../../MenuList/MenuListContext'
+import { useCallback, useContext } from 'react';
+import { MenuListContext } from '../../MenuList/MenuListContext';
+import { handleFocusByKeyBoard } from './handleFocusByKeyBoard';
 
 /**
  * MenuListContextに含まれるvalue間で上下キーでfocusを移動できる
