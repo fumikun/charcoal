@@ -55,7 +55,7 @@ export const Label: StoryObj<typeof DropdownSelector> = {
   },
 }
 
-export const DefaultFromMenuItem: StoryObj<typeof DropdownSelector> = {
+export const DefaultFromProps: StoryObj<typeof DropdownSelector> = {
   render: function Render() {
     const [selected, setSelected] = useState<string | undefined>(undefined)
 
@@ -66,10 +66,9 @@ export const DefaultFromMenuItem: StoryObj<typeof DropdownSelector> = {
           onChange={setSelected}
           label="Label"
           showLabel
+          defaultValue="2"
         >
-          <DropdownMenuItem value="1" isDefault>
-            Option 1
-          </DropdownMenuItem>
+          <DropdownMenuItem value="1">Option 1</DropdownMenuItem>
           <DropdownMenuItem value="2">Option 2</DropdownMenuItem>
           <DropdownMenuItem value="3">Option 3</DropdownMenuItem>
         </DropdownSelector>

@@ -21,14 +21,12 @@ export function getValuesRecursive(children: MenuListChildren) {
       const props = child.props as {
         value?: string
         disabled?: boolean
-        isDefault?: boolean
         children?: React.ReactElement<typeof MenuItem | typeof MenuItemGroup>[]
       }
       if ('value' in props && typeof props.value === 'string') {
         propsArray.push({
           disabled: props.disabled,
           value: props.value,
-          isDefault: props.isDefault,
         })
       }
       if ('children' in props && props.children) {

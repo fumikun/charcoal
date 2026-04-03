@@ -16,6 +16,7 @@ import { findPreviewRecursive } from './utils/findPreviewRecursive'
 export type DropdownSelectorProps = {
   label: string
   value?: string
+  defaultValue?: string
   disabled?: boolean
   placeholder?: string
   showLabel?: boolean
@@ -43,10 +44,13 @@ export default function DropdownSelector({
   const triggerRef = useRef<HTMLButtonElement>(null)
   const [isOpen, setIsOpen] = useState(false)
   const propsArray = getValuesRecursive(props.children)
-  const defaultItemValue = useMemo(
-    () => propsArray.find((itemProps) => itemProps.isDefault === true)?.value,
-    [propsArray],
-  )
+  const defaultItemValue = useMemo(() => {
+    // defaultValue props が優先
+    if (props.defaultValue !== undefined) {
+      return props.defaultValue
+    }
+    return undefined
+  }, [props.defaultValue])
 
   const selectedValue = useMemo(() => {
     if (props.value !== undefined) {

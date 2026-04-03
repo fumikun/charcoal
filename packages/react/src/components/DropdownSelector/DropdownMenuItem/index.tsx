@@ -8,7 +8,6 @@ import { MenuListContext } from '../MenuList/MenuListContext'
 export type DropdownMenuItemProps = Omit<MenuItemProps, 'as'> & {
   secondary?: ReactNode
   contentFullWidth?: boolean
-  isDefault?: boolean
 }
 
 /**
