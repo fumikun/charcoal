@@ -1,6 +1,6 @@
-import { ForwardedRef, forwardRef } from 'react';
-import ListItem, { ListItemProps } from '../ListItem';
-import { useMenuItemHandleKeyDown } from './internals/useMenuItemHandleKeyDown';
+import { ForwardedRef, forwardRef } from 'react'
+import ListItem, { ListItemProps } from '../ListItem'
+import { useMenuItemHandleKeyDown } from './internals/useMenuItemHandleKeyDown'
 
 export type MenuItemProps<T extends React.ElementType = 'li'> = {
   value?: string

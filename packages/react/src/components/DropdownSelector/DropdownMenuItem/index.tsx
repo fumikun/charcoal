@@ -1,9 +1,9 @@
-import './index.css';
+import './index.css'
 
-import { ReactNode, useContext } from 'react';
-import Icon from '../../Icon';
-import MenuItem, { MenuItemProps } from '../MenuItem';
-import { MenuListContext } from '../MenuList/MenuListContext';
+import { ReactNode, useContext } from 'react'
+import Icon from '../../Icon'
+import MenuItem, { MenuItemProps } from '../MenuItem'
+import { MenuListContext } from '../MenuList/MenuListContext'
 
 export type DropdownMenuItemProps = Omit<MenuItemProps, 'as'> & {
   secondary?: ReactNode

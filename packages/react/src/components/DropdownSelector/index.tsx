@@ -1,17 +1,17 @@
-import './index.css';
+import './index.css'
 
-import { useId } from '@react-aria/utils';
-import { useVisuallyHidden } from '@react-aria/visually-hidden';
-import React, { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
-import { useClassNames } from '../../_lib/useClassNames';
-import FieldLabel from '../FieldLabel';
-import Icon from '../Icon';
-import { AssistiveText } from '../TextField/AssistiveText';
-import { DropdownPopover } from './DropdownPopover';
-import MenuList, { MenuListChildren } from './MenuList';
-import { getValuesRecursive } from './MenuList/internals/getValuesRecursive';
-import { PopoverProps } from './Popover';
-import { findPreviewRecursive } from './utils/findPreviewRecursive';
+import { useId } from '@react-aria/utils'
+import { useVisuallyHidden } from '@react-aria/visually-hidden'
+import React, { ReactNode, useCallback, useMemo, useRef, useState } from 'react'
+import { useClassNames } from '../../_lib/useClassNames'
+import FieldLabel from '../FieldLabel'
+import Icon from '../Icon'
+import { AssistiveText } from '../TextField/AssistiveText'
+import { DropdownPopover } from './DropdownPopover'
+import MenuList, { MenuListChildren } from './MenuList'
+import { getValuesRecursive } from './MenuList/internals/getValuesRecursive'
+import { PopoverProps } from './Popover'
+import { findPreviewRecursive } from './utils/findPreviewRecursive'
 
 export type DropdownSelectorProps = {
   label: string
@@ -60,7 +60,9 @@ export default function DropdownSelector({
     defaultItemValue !== undefined && selectedValue === defaultItemValue
 
   const isPlaceholder = useMemo(
-    () => isDefaultSelected || (props.placeholder !== undefined && preview === undefined),
+    () =>
+      isDefaultSelected ||
+      (props.placeholder !== undefined && preview === undefined),
     [isDefaultSelected, preview, props.placeholder],
   )
 

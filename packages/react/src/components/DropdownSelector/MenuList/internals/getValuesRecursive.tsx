@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { MenuListChildren } from '..';
-import { DropdownMenuItemProps } from '../../DropdownMenuItem';
-import MenuItem from '../../MenuItem';
-import MenuItemGroup from '../../MenuItemGroup';
+import * as React from 'react'
+import { MenuListChildren } from '..'
+import { DropdownMenuItemProps } from '../../DropdownMenuItem'
+import MenuItem from '../../MenuItem'
+import MenuItemGroup from '../../MenuItemGroup'
 
 /**
  * valueというpropsを持つ子要素の値を再起的に探索して配列にする
