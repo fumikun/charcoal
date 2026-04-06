@@ -1,14 +1,14 @@
+import { Meta, StoryObj } from '@storybook/react-vite'
 import { useRef, useState } from 'react'
 import DropdownSelector from '.'
-import { Divider } from './Divider'
-import MenuItemGroup from './MenuItemGroup'
-import DropdownMenuItem from './DropdownMenuItem'
+import Button from '../Button'
 import Modal from '../Modal'
 import { ModalBody, ModalHeader } from '../Modal/ModalPlumbing'
-import { Meta, StoryObj } from '@storybook/react-vite'
-import TextField from '../TextField'
 import TextArea from '../TextArea'
-import Button from '../Button'
+import TextField from '../TextField'
+import { Divider } from './Divider'
+import DropdownMenuItem from './DropdownMenuItem'
+import MenuItemGroup from './MenuItemGroup'
 
 export default {
   title: 'react/DropdownSelector',
@@ -45,6 +45,50 @@ export const Label: StoryObj<typeof DropdownSelector> = {
           onChange={setSelected}
           label="Label"
           showLabel
+        >
+          <DropdownMenuItem value="1">Option 1</DropdownMenuItem>
+          <DropdownMenuItem value="2">Option 2</DropdownMenuItem>
+          <DropdownMenuItem value="3">Option 3</DropdownMenuItem>
+        </DropdownSelector>
+      </div>
+    )
+  },
+}
+
+export const DefaultFromProps: StoryObj<typeof DropdownSelector> = {
+  render: function Render() {
+    const [selected, setSelected] = useState<string | undefined>(undefined)
+
+    return (
+      <div style={{ width: 288 }}>
+        <DropdownSelector
+          value={selected}
+          onChange={setSelected}
+          label="Label"
+          showLabel
+          defaultValue="2"
+        >
+          <DropdownMenuItem value="1">Option 1</DropdownMenuItem>
+          <DropdownMenuItem value="2">Option 2</DropdownMenuItem>
+          <DropdownMenuItem value="3">Option 3</DropdownMenuItem>
+        </DropdownSelector>
+      </div>
+    )
+  },
+}
+
+export const Placeholder: StoryObj<typeof DropdownSelector> = {
+  render: function Render() {
+    const [selected, setSelected] = useState<string | undefined>(undefined)
+
+    return (
+      <div style={{ width: 288 }}>
+        <DropdownSelector
+          value={selected}
+          onChange={setSelected}
+          label="Label"
+          showLabel
+          placeholder="This is placeholder text"
         >
           <DropdownMenuItem value="1">Option 1</DropdownMenuItem>
           <DropdownMenuItem value="2">Option 2</DropdownMenuItem>

@@ -1,21 +1,22 @@
 import './index.css'
 
-import React, { ReactNode, useState, useRef, useMemo, useCallback } from 'react'
-import Icon from '../Icon'
+import { useId } from '@react-aria/utils'
+import { useVisuallyHidden } from '@react-aria/visually-hidden'
+import React, { ReactNode, useCallback, useMemo, useRef, useState } from 'react'
+import { useClassNames } from '../../_lib/useClassNames'
 import FieldLabel from '../FieldLabel'
+import Icon from '../Icon'
+import { AssistiveText } from '../TextField/AssistiveText'
 import { DropdownPopover } from './DropdownPopover'
-import { findPreviewRecursive } from './utils/findPreviewRecursive'
 import MenuList, { MenuListChildren } from './MenuList'
 import { getValuesRecursive } from './MenuList/internals/getValuesRecursive'
-import { useVisuallyHidden } from '@react-aria/visually-hidden'
-import { AssistiveText } from '../TextField/AssistiveText'
-import { useClassNames } from '../../_lib/useClassNames'
-import { useId } from '@react-aria/utils'
 import { PopoverProps } from './Popover'
+import { findPreviewRecursive } from './utils/findPreviewRecursive'
 
 export type DropdownSelectorProps = {
   label: string
-  value: string
+  value?: string
+  defaultValue?: string
   disabled?: boolean
   placeholder?: string
   showLabel?: boolean
@@ -42,14 +43,32 @@ export default function DropdownSelector({
 }: DropdownSelectorProps) {
   const triggerRef = useRef<HTMLButtonElement>(null)
   const [isOpen, setIsOpen] = useState(false)
-  const preview = findPreviewRecursive(props.children, props.value)
+  const propsArray = getValuesRecursive(props.children)
+  const defaultItemValue = useMemo(() => {
+    // defaultValue props が優先
+    if (props.defaultValue !== undefined) {
+      return props.defaultValue
+    }
+    return undefined
+  }, [props.defaultValue])
+
+  const selectedValue = useMemo(() => {
+    if (props.value !== undefined) {
+      return props.value
+    }
+    return defaultItemValue ?? ''
+  }, [props.value, defaultItemValue])
+
+  const preview = findPreviewRecursive(props.children, selectedValue)
+  const isDefaultSelected =
+    defaultItemValue !== undefined && selectedValue === defaultItemValue
 
   const isPlaceholder = useMemo(
-    () => props.placeholder !== undefined && preview === undefined,
-    [preview, props.placeholder],
+    () =>
+      isDefaultSelected ||
+      (props.placeholder !== undefined && preview === undefined),
+    [isDefaultSelected, preview, props.placeholder],
   )
-
-  const propsArray = getValuesRecursive(props.children)
 
   const { visuallyHiddenProps } = useVisuallyHidden()
 
@@ -81,7 +100,7 @@ export default function DropdownSelector({
       <div {...visuallyHiddenProps} aria-hidden="true">
         <select
           name={props.name}
-          value={props.value}
+          value={selectedValue}
           onChange={handleChange}
           tabIndex={-1}
           ref={selectRef}
@@ -120,7 +139,7 @@ export default function DropdownSelector({
           className="charcoal-ui-dropdown-selector-text"
           data-placeholder={isPlaceholder}
         >
-          {isPlaceholder ? props.placeholder : preview}
+          {preview === undefined ? props.placeholder : preview}
         </span>
         <Icon className="charcoal-ui-dropdown-selector-icon" name="16/Menu" />
       </button>
@@ -129,11 +148,11 @@ export default function DropdownSelector({
           isOpen={isOpen}
           onClose={() => setIsOpen(false)}
           triggerRef={triggerRef}
-          value={props.value}
+          value={selectedValue}
           inertWorkaround={props.inertWorkaround}
         >
           <MenuList
-            value={props.value}
+            value={selectedValue}
             onChange={(v) => {
               onChange(v)
               setIsOpen(false)
